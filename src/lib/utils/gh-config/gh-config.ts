@@ -1,6 +1,6 @@
-export interface C4AppConfig {
-    title: string;
-    api: {
-        url: string;
-    };
+export interface GhAppConfig {
+  title: string;
+  api: {
+    url: string;
+  };
 }

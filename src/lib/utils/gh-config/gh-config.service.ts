@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 import { PlatformLocation } from '@angular/common';
 import { lastValueFrom } from 'rxjs';
-import { C4AppConfig as GhConfig } from './gh-config';
+import { GhAppConfig } from './gh-config';
 
-export class GhConfigService<TAppConfig extends GhConfig> {
+export class GhConfigService<TAppConfig extends GhAppConfig> {
   constructor(
     protected _http: HttpClient,
     protected _platformLocation: PlatformLocation,
@@ -25,7 +25,11 @@ export class GhConfigService<TAppConfig extends GhConfig> {
         })
         .catch((response: any) => {
           console.log('cfg error');
-          reject(`Could not load configuration file '${configPath}': ${JSON.stringify(response)}`);
+          reject(
+            `Could not load configuration file '${configPath}': ${JSON.stringify(
+              response
+            )}`
+          );
         });
     });
   }
@@ -56,7 +60,11 @@ export class GhConfigService<TAppConfig extends GhConfig> {
     }
   }
 
-  private isDefined(value: any, expectedType: string, isArray: boolean): boolean {
+  private isDefined(
+    value: any,
+    expectedType: string,
+    isArray: boolean
+  ): boolean {
     if (value === null || value === undefined) {
       //missing -> not defined
       return false;
