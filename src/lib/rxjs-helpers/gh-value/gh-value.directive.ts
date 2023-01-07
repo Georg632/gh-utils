@@ -7,12 +7,8 @@ import {
 } from '@angular/core';
 import { isObservable, Observable } from 'rxjs';
 
-class Context<T> {
+class GhValueContext<T> {
   $implicit!: T;
-
-  constructor(value: T) {
-    this.$implicit = value;
-  }
 }
 
 @Directive({
@@ -21,7 +17,7 @@ class Context<T> {
 })
 export class GhValueDirective<T> implements OnInit {
   @Input('ghValue') val!: T | Observable<T>;
-  _val!: T;
+  context: GhValueContext<T> = new GhValueContext<T>();
 
   constructor(
     private viewContainer: ViewContainerRef,
@@ -30,15 +26,15 @@ export class GhValueDirective<T> implements OnInit {
 
   ngOnInit(): void {
     if (isObservable(this.val)) {
-      this.val.subscribe((val) => (this._val = val));
+      this.val.subscribe((val) => {
+        console.log(val);
+        this.context.$implicit = val;
+      });
     } else {
-      this._val = this.val;
+      this.context.$implicit = this.val;
     }
 
-    this.viewContainer.createEmbeddedView(
-      this.templateRef,
-      new Context(this._val)
-    );
+    this.viewContainer.createEmbeddedView(this.templateRef, this.context);
   }
 
   // Guard to help Typescript correctly type checked
@@ -46,7 +42,7 @@ export class GhValueDirective<T> implements OnInit {
   static ngTemplateContextGuard<T>(
     directive: GhValueDirective<T>,
     context: unknown
-  ): context is Context<T> {
+  ): context is GhValueContext<T> {
     return true;
   }
 }
