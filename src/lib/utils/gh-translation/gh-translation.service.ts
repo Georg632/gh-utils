@@ -1,9 +1,9 @@
 import { registerLocaleData } from '@angular/common';
-import localDe from '@angular/common/locales/de';
+import localEn from '@angular/common/locales/en';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-registerLocaleData(localDe, 'de');
+registerLocaleData(localEn, 'en');
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +26,9 @@ export class GhTranslationService {
   }
 
   set language(desiredLanguage: string) {
-    desiredLanguage = desiredLanguage || (this.ngxTranslateService.getBrowserCultureLang() ?? '');
+    desiredLanguage =
+      desiredLanguage ||
+      (this.ngxTranslateService.getBrowserCultureLang() ?? '');
 
     let usedLanguage = GhTranslationService.findBestMatchingLanguage(
       desiredLanguage,
@@ -44,7 +46,10 @@ export class GhTranslationService {
     return this.ngxTranslateService.currentLang;
   }
 
-  static findBestMatchingLanguage(language: string, supportedLanguages: string[]) {
+  static findBestMatchingLanguage(
+    language: string,
+    supportedLanguages: string[]
+  ) {
     if (!language) {
       language = '';
     }
@@ -53,22 +58,31 @@ export class GhTranslationService {
     const shortLanguage = language.split('-')[0];
 
     //try to find exact match
-    let result = supportedLanguages.find(sl => sl.toLowerCase() === language);
+    let result = supportedLanguages.find((sl) => sl.toLowerCase() === language);
 
     //try to remove "-" of target language (en-US -> en)
     if (!result) {
-      result = supportedLanguages.find(sl => sl.toLowerCase() === shortLanguage);
+      result = supportedLanguages.find(
+        (sl) => sl.toLowerCase() === shortLanguage
+      );
     }
 
     //try to remove "-" of supported languages
     if (!result) {
-      result = supportedLanguages.find(sl => sl.toLowerCase().split('-')[0] === shortLanguage);
+      result = supportedLanguages.find(
+        (sl) => sl.toLowerCase().split('-')[0] === shortLanguage
+      );
     }
 
     return result;
   }
 
-  init(appLanguages: string[], cookiePrefix: string, getCookie: Function, setCookie: Function) {
+  init(
+    appLanguages: string[],
+    cookiePrefix: string,
+    getCookie: Function,
+    setCookie: Function
+  ) {
     if (appLanguages.length < 1)
       throw new Error('Init Languages Error: No Language found in settings');
     this.supportedLanguages = appLanguages;

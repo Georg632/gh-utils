@@ -31,7 +31,7 @@ export class GhValueDirective<T> implements OnInit {
       this.val.subscribe((val) => {
         console.log(val);
         this.context.$implicit = val;
-        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
       });
     } else {
       this.context.$implicit = this.val;
