@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Directive,
   Input,
   OnInit,
@@ -21,7 +22,8 @@ export class GhValueDirective<T> implements OnInit {
 
   constructor(
     private viewContainer: ViewContainerRef,
-    private templateRef: TemplateRef<any>
+    private templateRef: TemplateRef<any>,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +31,7 @@ export class GhValueDirective<T> implements OnInit {
       this.val.subscribe((val) => {
         console.log(val);
         this.context.$implicit = val;
+        this.changeDetectorRef.markForCheck();
       });
     } else {
       this.context.$implicit = this.val;
