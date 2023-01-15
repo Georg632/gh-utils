@@ -4,6 +4,7 @@ export const ID_ROUTE_END: string = 'Id';
 export class RoutingHelper<T> {
   private readonly PROP_PATH = '_pathProp';
   private readonly PROP_NAVROUTE = '_navRoute';
+  private readonly IGNORE_PROPS = [this.PROP_PATH, this.PROP_NAVROUTE];
 
   private routingMap: T;
 
@@ -38,7 +39,7 @@ export class RoutingHelper<T> {
   private addRoutingProperties(obj: any, prevNavRoute: string[]) {
     const keys = Object.keys(obj);
     keys
-      .filter((x) => ![this.PROP_PATH, this.PROP_NAVROUTE].includes(x))
+      .filter((x) => !this.IGNORE_PROPS.includes(x))
       .forEach((key) => {
         let o = obj[key];
         o[this.PROP_PATH] = key.endsWith(ID_ROUTE_END)
