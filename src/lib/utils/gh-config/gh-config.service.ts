@@ -12,7 +12,6 @@ export class GhConfigService<TAppConfig extends GhAppConfig> {
   ) {}
 
   load(configPath: string, defaultValues: any): Promise<TAppConfig> {
-    //inspired by https://devblogs.microsoft.com/premier-developer/angular-how-to-editable-config-files/
     return new Promise<TAppConfig>((resolve, reject) => {
       lastValueFrom(this._http.get(configPath))
         .then((response: any) => {
