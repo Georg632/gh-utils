@@ -2,6 +2,7 @@ import { registerLocaleData } from '@angular/common';
 import localEn from '@angular/common/locales/en';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { getCookie, setCookie } from '../cookies/cookie';
 
 registerLocaleData(localEn, 'en');
 
@@ -13,8 +14,8 @@ export class GhTranslationService {
   supportedLanguages: string[] = [];
   onLangChange = this.ngxTranslateService.onLangChange;
   cookiePrefix: string = '';
-  getCookie!: Function;
-  setCookie!: Function;
+  getCookie: Function = getCookie;
+  setCookie: Function = setCookie;
 
   //https://github.com/angular/angular/issues/15039
   //https://angular.io/guide/i18n
@@ -80,15 +81,15 @@ export class GhTranslationService {
   init(
     appLanguages: string[],
     cookiePrefix: string,
-    getCookie: Function,
-    setCookie: Function
+    getCookie?: Function,
+    setCookie?: Function
   ) {
     if (appLanguages.length < 1)
       throw new Error('Init Languages Error: No Language found in settings');
     this.supportedLanguages = appLanguages;
     this.cookiePrefix = cookiePrefix;
-    this.getCookie = getCookie;
-    this.setCookie = setCookie;
+    if (getCookie) this.getCookie = getCookie;
+    if (setCookie) this.setCookie = setCookie;
 
     const defaultLanguage = appLanguages[0];
     this.ngxTranslateService.setDefaultLang(defaultLanguage);
