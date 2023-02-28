@@ -9,3 +9,7 @@ export * from './lib/tailwind-helpers/tw-breakpoints/tw-breakpoints.component';
 export * from './lib/routing/routing-helper';
 
 export * from './lib/utils/cookies/cookie';
+
+export * from './lib/layout/gh-layout.module';
+export * from './lib/layout/gh-layout/gh-layout.component';
+export * from './lib/layout/gh-layout-session/gh-layout-session.service';

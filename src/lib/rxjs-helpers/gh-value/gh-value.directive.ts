@@ -17,7 +17,7 @@ class GhValueContext<T> {
   standalone: true,
 })
 export class GhValueDirective<T> implements OnInit {
-  @Input('ghValue') val!: T | Observable<T>;
+  @Input('ghValue') val!: Observable<T>;
   context: GhValueContext<T> = new GhValueContext<T>();
 
   constructor(
