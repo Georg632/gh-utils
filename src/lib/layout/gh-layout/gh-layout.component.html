@@ -56,19 +56,15 @@
                   aria-expanded="false"
                   (click)="toggleMobile()"
                 >
-                  <ng-container *ngIf="lm.mobileActive">
+                  <div *ngIf="lm.mobileActive; else xmark">
                     <span class="sr-only">Open main menu</span>
-                    <fa-icon
-                      class="block h-6 w-6"
-                      [icon]="['fas', 'bars']"
-                    ></fa-icon>
-                  </ng-container>
-                  <ng-container *ngIf="!lm.mobileActive">
-                    <fa-icon
-                      class="block h-6 w-6"
-                      [icon]="['fas', 'xmark']"
-                    ></fa-icon>
-                  </ng-container>
+                    <i class="fa-solid fa-bars block h-6 w-6"></i>
+                  </div>
+                  <ng-template #xmark>
+                    <div>
+                      <i class="fa-solid fa-xmark block h-6 w-6"></i>
+                    </div>
+                  </ng-template>
                 </button>
               </div>
             </div>
