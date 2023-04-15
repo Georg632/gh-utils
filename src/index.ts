@@ -3,6 +3,7 @@ export * from './lib/utils/gh-config/gh-config';
 export * from './lib/utils/gh-translation/gh-translation.service';
 
 export * from './lib/rxjs-helpers/gh-value/gh-value.directive';
+export * from './lib/rxjs-helpers/behavior-state-subject/behavior-state-subject';
 
 export * from './lib/tailwind-helpers/tw-breakpoints/tw-breakpoints.component';
 
