@@ -22,6 +22,9 @@ export class GhLayoutSessionService {
   >([]);
   userProfile: BehaviorSubject<GhLayoutProfile> =
     new BehaviorSubject<GhLayoutProfile>({ imgUrl: undefined, name: '' });
+  darkModeActive: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
 
   constructor() {}
 }

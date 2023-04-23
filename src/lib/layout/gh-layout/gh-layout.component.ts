@@ -12,9 +12,10 @@ export class GhLayoutComponent {
     this.ghLayoutSessionService.logoUrl,
     this.ghLayoutSessionService.mobileActive,
     this.ghLayoutSessionService.userProfile,
+    this.ghLayoutSessionService.darkModeActive,
   ]).pipe(
-    map(([navs, logoUrl, mobileActive, userProfile]) => {
-      return { navs, logoUrl, mobileActive, userProfile };
+    map(([navs, logoUrl, mobileActive, userProfile, darkModeActive]) => {
+      return { navs, logoUrl, mobileActive, userProfile, darkModeActive };
     })
   );
 
@@ -23,6 +24,12 @@ export class GhLayoutComponent {
   toggleMobile() {
     this.ghLayoutSessionService.mobileActive.next(
       !this.ghLayoutSessionService.mobileActive.getValue()
+    );
+  }
+
+  toggleColorMode() {
+    this.ghLayoutSessionService.darkModeActive.next(
+      !this.ghLayoutSessionService.darkModeActive.getValue()
     );
   }
 }
