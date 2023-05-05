@@ -11,7 +11,6 @@ export class RoutingHelper<T> {
   constructor(routingMap: T) {
     this.routingMap = routingMap;
     this.init();
-    console.log(this.routingMap);
   }
 
   getPath(f: (x: T) => any): string {

@@ -40,7 +40,6 @@ export class GhValueDirective<T> implements OnInit {
         this.subscribeStateContext(this.val);
       }
       this.val.subscribe((val) => {
-        console.log(val);
         this.context.$implicit = val;
 
         this.changeDetectorRef.detectChanges();
