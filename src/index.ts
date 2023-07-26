@@ -7,9 +7,12 @@ export * from './lib/rxjs-helpers/behavior-state-subject/behavior-state-subject'
 
 export * from './lib/tailwind-helpers/tw-breakpoints/tw-breakpoints.component';
 
-export * from './lib/routing/routing-helper';
+export * from './lib/routing';
+export * from './lib/pipes/navigation.pipe';
 
 export * from './lib/utils/cookies/cookie';
+
+export * from './lib/directives/breadcrumb';
 
 export * from './lib/layout/gh-layout.module';
 export * from './lib/layout/gh-layout/gh-layout.component';
