@@ -1,0 +1,16 @@
+<div class="hidden h-16 sm:ml-6 sm:flex sm:space-x-8">
+  <a
+    *ngFor="let item of navItems"
+    [routerLink]="item.url"
+    routerLinkActive
+    #rla="routerLinkActive"
+    class="inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium"
+    [ngClass]="[
+      rla.isActive
+        ? 'border-primary-500 text-gray-900'
+        : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+    ]"
+    aria-current="page"
+    >{{ item.label | translate }}</a
+  >
+</div>

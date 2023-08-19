@@ -1,30 +1,58 @@
 import { Injectable } from '@angular/core';
+import {
+  AppConfigService,
+  GhTheme,
+  TwColorDefinition,
+} from '@company-butler/shared/utils';
 import { BehaviorSubject } from 'rxjs';
-
-export interface GhDomainModel {
-  url: string[];
-  label: string;
-}
-
-export interface GhLayoutProfile {
-  imgUrl: string | undefined;
-  name: string;
-}
+import * as _ from 'lodash';
+import { NavigationModel } from '../model/navigation.model';
+import { MainHeaderModel } from '../model/main-header.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GhLayoutSessionService {
-  logoUrl: BehaviorSubject<string> = new BehaviorSubject('');
+  activeTheme: BehaviorSubject<GhTheme | undefined> = new BehaviorSubject<
+    GhTheme | undefined
+  >(undefined);
   mobileActive: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  domainNavigations: BehaviorSubject<GhDomainModel[]> = new BehaviorSubject<
-    GhDomainModel[]
+  navigationItems$: BehaviorSubject<NavigationModel[]> = new BehaviorSubject<
+    NavigationModel[]
   >([]);
-  userProfile: BehaviorSubject<GhLayoutProfile> =
-    new BehaviorSubject<GhLayoutProfile>({ imgUrl: undefined, name: '' });
-  darkModeActive: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
-  );
+  mainHeaderModel$: BehaviorSubject<MainHeaderModel> =
+    new BehaviorSubject<MainHeaderModel>({ title: 'default' });
 
   constructor() {}
+
+  applyNavigationItems(navItems: NavigationModel[]) {
+    this.navigationItems$.next(navItems);
+  }
+
+  applyTheme(themeId: string) {
+    const theme = AppConfigService.settings.themes.find((t) => t.id == themeId);
+    if (!theme) {
+      console.log(`Theme with id '${themeId}' not found`);
+      return;
+    }
+
+    this.applyColors(theme.colors);
+    this.activeTheme.next(theme);
+  }
+
+  private applyColors(colors: { [key: string]: string | TwColorDefinition }) {
+    const root = document.querySelector(':root')! as any;
+    Object.keys(colors).forEach((colorName) => {
+      if (_.isObject(colors[colorName])) {
+        Object.keys(colors[colorName]).forEach((colorShade) => {
+          root.style.setProperty(
+            `--color-${colorName}-${colorShade}`,
+            (colors[colorName] as any)[colorShade]
+          );
+        });
+      } else {
+        root.style.setProperty(`--color-${colorName}`, colors[colorName]);
+      }
+    });
+  }
 }
