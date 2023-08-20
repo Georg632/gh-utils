@@ -1,1 +1,8 @@
-<p>auth-redirect-button works!</p>
+<div class="flex gap-x-6">
+  <button ghButton (click)="onLogin.emit()">
+    {{ 'auth.toLogin' | translate }}
+  </button>
+  <button ghButton (click)="onSignUp.emit()">
+    {{ 'auth.toSignUp' | translate }}
+  </button>
+</div>

@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 import * as _ from 'lodash';
 import { NavigationModel } from '../model/navigation.model';
 import { MainHeaderModel } from '../model/main-header.model';
+import { LayoutMenuModel } from '../model/layout-menu.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,10 +24,18 @@ export class GhLayoutSessionService {
   mainHeaderModel$: BehaviorSubject<MainHeaderModel> =
     new BehaviorSubject<MainHeaderModel>({ title: 'default' });
 
+  layoutMenuModel$: BehaviorSubject<LayoutMenuModel[]> = new BehaviorSubject<
+    LayoutMenuModel[]
+  >([]);
+
   constructor() {}
 
   applyNavigationItems(navItems: NavigationModel[]) {
     this.navigationItems$.next(navItems);
+  }
+
+  applyLayoutMenuModel(layoutModels: LayoutMenuModel[]) {
+    this.layoutMenuModel$.next(layoutModels);
   }
 
   applyTheme(themeId: string) {

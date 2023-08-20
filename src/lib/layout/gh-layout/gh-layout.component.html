@@ -5,10 +5,22 @@
       [navItems]="(session.navigationItems$ | async) ?? []"></nav-list>
     <user-avatar
       *ngIf="auth.isAuthenticated$ | async; else authredirect"
-      auth-section></user-avatar>
+      auth-section
+      [user]="auth.user$ | async"
+      [menu]="menu">
+    </user-avatar>
     <ng-template #authredirect
-      ><auth-redirect-button></auth-redirect-button
+      ><auth-redirect-button
+        (onLogin)="auth.loginWithRedirect()"
+        (onSignUp)="signUpRedirect()"></auth-redirect-button
     ></ng-template>
+    <ng-template #menu>
+      <layout-menu
+        menu
+        [layoutMenuModel]="
+          (session.layoutMenuModel$ | async) ?? []
+        "></layout-menu>
+    </ng-template>
   </topbar>
   <div class="py-10">
     <main-header [model]="session.mainHeaderModel$ | async"></main-header>

@@ -10,6 +10,9 @@ import { MainHeaderComponent } from './components/main-header/main-header.compon
 import { NavListComponent } from './components/nav-list/nav-list.component';
 import { UserAvatarComponent } from './components/user-avatar/user-avatar.component';
 import { AuthRedirectButtonComponent } from './components/auth-redirect-button/auth-redirect-button.component';
+import { GhButtonDirective } from '@company-butler/shared/ui';
+import { LayoutMenuComponent } from './components/layout-menu/layout-menu.component';
+import { CdkMenu, CdkMenuTrigger } from '@angular/cdk/menu';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,7 @@ import { AuthRedirectButtonComponent } from './components/auth-redirect-button/a
     NavListComponent,
     UserAvatarComponent,
     AuthRedirectButtonComponent,
+    LayoutMenuComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +30,9 @@ import { AuthRedirectButtonComponent } from './components/auth-redirect-button/a
     TranslateModule,
     GhValueDirective,
     FontAwesomeModule,
+    GhButtonDirective,
+    CdkMenu,
+    CdkMenuTrigger,
   ],
 })
 export class GhLayoutModule {}

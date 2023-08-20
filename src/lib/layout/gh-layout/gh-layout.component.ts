@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { combineLatest, map, of } from 'rxjs';
+import { Component } from '@angular/core';
 import { GhLayoutSessionService } from '../gh-layout-session/gh-layout-session.service';
 import { AuthService } from '@auth0/auth0-angular';
 
@@ -17,7 +16,11 @@ export class GhLayoutComponent {
     this.session.mobileActive.next(!this.session.mobileActive.getValue());
   }
 
-  loginRedirect() {
-    this.auth.loginWithRedirect();
+  signUpRedirect() {
+    this.auth.loginWithRedirect({
+      authorizationParams: {
+        screen_hint: 'signup',
+      },
+    });
   }
 }
