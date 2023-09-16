@@ -10,7 +10,10 @@ import { MainHeaderComponent } from './components/main-header/main-header.compon
 import { NavListComponent } from './components/nav-list/nav-list.component';
 import { UserAvatarComponent } from './components/user-avatar/user-avatar.component';
 import { AuthRedirectButtonComponent } from './components/auth-redirect-button/auth-redirect-button.component';
-import { GhButtonDirective } from '@company-butler/shared/ui';
+import {
+  GhButtonContentComponent,
+  GhButtonDirective,
+} from '@company-butler/shared/ui';
 import { LayoutMenuComponent } from './components/layout-menu/layout-menu.component';
 import { CdkMenu, CdkMenuTrigger } from '@angular/cdk/menu';
 
@@ -33,6 +36,7 @@ import { CdkMenu, CdkMenuTrigger } from '@angular/cdk/menu';
     GhButtonDirective,
     CdkMenu,
     CdkMenuTrigger,
+    GhButtonContentComponent,
   ],
 })
 export class GhLayoutModule {}
